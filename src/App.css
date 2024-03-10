@@ -1,3 +1,11 @@
+:root {
+  --text: rgb(230, 239, 235);
+  --background: rgb(5, 10, 8);
+  --primary: rgb(62, 168, 127);
+  --secondary: rgb(28, 105, 75);
+  --accent: rgb(29, 165, 113);
+}
+
 .App {
   text-align: center;
 }
