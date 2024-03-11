@@ -18,7 +18,7 @@ type TFilamentType = {
 }
 
 function App() {
-  const [cost, setCost] = useState<number | undefined>(0)
+  const [cost, setCost] = useState<number | undefined>(undefined)
 
   const typesOfFilament:TFilamentType[] = [
     {type: "PLA", cost: 175, weight: 2, shipping: 10},
@@ -48,22 +48,30 @@ function App() {
   return (
     <div className="App">
       <form onSubmit={handleSubmit(calculate)}>
-        <label>Filament type </label>
-        <select id="filmentType" {...register("type")}>
-          <option value={""}></option>
-          {typesOfFilament.map((type) => <option value={type.type}>{type.type}</option>)}
-        </select>
-        {errors.type?.message && <p>{errors.type?.message}</p>}
-        <br/>
-        <label htmlFor="shipping">Shipping </label>
-        <input type="checkbox" id="shipping" {...register("shipping")} />
-        <br/>
-        <input type="number" {...register("weight")} />
-        {errors.weight?.message && <p>{errors.weight?.message}</p>}
-        <br/>
-        <input type="submit" value="Calculate" />
+        <h3>Calculate <span>Print</span> Cost</h3>
+        <div className="field">
+          <p>Filament type </p>
+          <select id="filmentType" {...register("type")}>
+            <option value={""}></option>
+            {typesOfFilament.map((type) => <option value={type.type}>{type.type}</option>)}
+          </select>
+          {errors.type?.message && <p>{errors.type?.message}</p>}
+        </div>
+        <div className="field">
+          <p>Weight of print</p>
+          <input type="number" {...register("weight")} />
+          {errors.weight?.message && <p>{errors.weight?.message}</p>}
+        </div>
+        <div className="field">
+          <div className="row">
+            <p>Shipping </p>
+            <input type="checkbox" id="shipping" {...register("shipping")} />
+          </div>
+          <small>*Cost may be higher.</small>
+        </div>
+      <input type="submit" value="Calculate" />
+      {cost && <p id='output'>{cost}zł</p>}
       </form>
-      <p id='output'>{cost}zł</p>
     </div>
   );
 }
